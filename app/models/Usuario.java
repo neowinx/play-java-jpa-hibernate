@@ -5,14 +5,15 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 
 @Entity
-public class Proveedor extends Model {
+public class Usuario extends Model {
 
     @Id
     public Long id;
-    public String nombre;
+
+    public String usuario;
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    public Usuario usuario;
+    public Proveedor proveedor;
 
 }
