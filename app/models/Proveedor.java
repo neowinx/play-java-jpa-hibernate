@@ -1,18 +1,19 @@
 package models;
 
-import play.db.ebean.Model;
-
 import javax.persistence.*;
+import java.util.List;
+import java.util.Vector;
 
 @Entity
-public class Proveedor extends Model {
+public class Proveedor {
 
     @Id
+    @GeneratedValue(generator = "PROV_GENERATOR", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "PROV_GENERATOR", sequenceName = "proveedor_seq", allocationSize = 1, initialValue = 1)
     public Long id;
     public String nombre;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    public Usuario usuario;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "proveedor", cascade = CascadeType.ALL)
+    public List<Usuario> usuarios = new Vector<Usuario>();
 
 }
